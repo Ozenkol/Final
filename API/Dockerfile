@@ -2,7 +2,7 @@ FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /src
 COPY .. .
 RUN echo "Debugging..." && pwd && ls -la
-RUN dotnet publish "API.csproj" -o /published /p:UseAppHost=false
+RUN dotnet publish "API/API.csproj" -o /published /p:UseAppHost=false
 
 
 FROM mcr.microsoft.com/dotnet/aspnet:9.0
