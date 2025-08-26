@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess;
 
-public class FinalDbContext: IdentityDbContext
+public class FinalDbContext: IdentityDbContext<UserEntity>
 {
     public FinalDbContext(DbContextOptions<FinalDbContext> options) : base(options) { }
     public DbSet<ProductEntity> Products { get; set; }

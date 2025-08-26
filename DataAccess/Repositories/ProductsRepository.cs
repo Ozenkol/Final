@@ -46,18 +46,32 @@ public class ProductsRepository : IProductsRepository
         return productList;
     }
 
-    public Task<List<Product>> GetUserProductList(int userId)
+    public async Task<List<Product>> GetUserProductList(int userId)
     {
-        throw new NotImplementedException();
+        var productEntityList = await _context.Products.AsNoTracking().Where(p => p.UserId == userId).ToListAsync();
+        var productList = productEntityList.Select(i => Product.Create(i.InventoryId, i.Title, i.Description, i.InventoryId).product).ToList();
+        return productList;
     }
 
-    public Task<int> DeleteProduct(int id)
+    public async Task<int> DeleteProduct(int id)
     {
-        throw new NotImplementedException();
+        var product = await _context.Products.AsNoTracking().FirstAsync(i => i.ProductId == id);
+        if (product != null) {
+            await _context.Products.AsNoTracking().Where(i => i.UserId == id).ExecuteDeleteAsync();
+            return product.ProductId;
+        }
+        return -1;
     }
 
-    public Task<int> UpdateProduct(Product product)
+    public async Task<int> UpdateProduct(Product product)
     {
-        throw new NotImplementedException();
+        var productEntity = new ProductEntity
+        {
+            ProductId = product.ProductId,
+            Title = product.Title,
+            Description = product.Description
+        };
+        await _context.Products.Where(i => i.ProductId == productEntity.ProductId).ExecuteUpdateAsync(s => s.SetProperty(i => i.Title, i=>productEntity.Title).SetProperty(i => i.Description, i => productEntity.Description));
+        return productEntity.ProductId;
     }
 }

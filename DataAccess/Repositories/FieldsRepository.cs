@@ -27,13 +27,24 @@ public class FieldsRepository: IFieldsRepository
         return fieldEntity.FieldId;
     }
 
-    public Task<int> UpdateField(Field field)
+    public async Task<int> UpdateField(Field field)
     {
-        throw new NotImplementedException();
+        var fieldEntity = new FieldEntity
+        {
+            FieldId = field.FieldId,
+            Name = field.Name
+        };
+        await _context.Fields.Where(i => i.FieldId == fieldEntity.FieldId).ExecuteUpdateAsync(s => s.SetProperty(i => i.Name, i=>fieldEntity.Name));
+        return fieldEntity.FieldId;
     }
 
-    public Task<int> DeleteField(int id)
+    public async Task<int> DeleteField(int id)
     {
-        throw new NotImplementedException();
+        var fieldEntity = await _context.Fields.AsNoTracking().FirstAsync(i => i.FieldId == id);
+        if (fieldEntity != null) {
+            await _context.Fields.AsNoTracking().Where(i => i.FieldId == id).ExecuteDeleteAsync();
+            return fieldEntity.FieldId;
+        }
+        return -1;
     }
 }

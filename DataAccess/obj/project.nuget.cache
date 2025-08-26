@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ianHGd4GsvU=",
+  "dgSpecHash": "qfg4NU/Tf0A=",
   "success": true,
-  "projectFilePath": "c:\\Users\\Ferrum\\intern\\Itransition\\Final\\backend\\DataAccess\\DataAccess.csproj",
+  "projectFilePath": "C:\\Users\\Ferrum\\intern\\Itransition\\Final\\backend\\DataAccess\\DataAccess.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Ferrum\\.nuget\\packages\\entityframework\\6.1.0\\entityframework.6.1.0.nupkg.sha512",
     "C:\\Users\\Ferrum\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
@@ -59,9 +59,9 @@
       "code": "NU1701",
       "level": "Warning",
       "message": "Пакет \"EntityFramework 6.1.0\" был восстановлен с помощью \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1\", а не целевой платформы проекта \"net9.0\". Этот пакет может быть не полностью совместим с вашим проектом.",
-      "projectPath": "c:\\Users\\Ferrum\\intern\\Itransition\\Final\\backend\\DataAccess\\DataAccess.csproj",
+      "projectPath": "C:\\Users\\Ferrum\\intern\\Itransition\\Final\\backend\\DataAccess\\DataAccess.csproj",
       "warningLevel": 1,
-      "filePath": "c:\\Users\\Ferrum\\intern\\Itransition\\Final\\backend\\DataAccess\\DataAccess.csproj",
+      "filePath": "C:\\Users\\Ferrum\\intern\\Itransition\\Final\\backend\\DataAccess\\DataAccess.csproj",
       "libraryId": "EntityFramework",
       "targetGraphs": [
         "net9.0"
@@ -71,9 +71,9 @@
       "code": "NU1701",
       "level": "Warning",
       "message": "Пакет \"Microsoft.AspNet.Identity.Core 2.2.4\" был восстановлен с помощью \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1\", а не целевой платформы проекта \"net9.0\". Этот пакет может быть не полностью совместим с вашим проектом.",
-      "projectPath": "c:\\Users\\Ferrum\\intern\\Itransition\\Final\\backend\\DataAccess\\DataAccess.csproj",
+      "projectPath": "C:\\Users\\Ferrum\\intern\\Itransition\\Final\\backend\\DataAccess\\DataAccess.csproj",
       "warningLevel": 1,
-      "filePath": "c:\\Users\\Ferrum\\intern\\Itransition\\Final\\backend\\DataAccess\\DataAccess.csproj",
+      "filePath": "C:\\Users\\Ferrum\\intern\\Itransition\\Final\\backend\\DataAccess\\DataAccess.csproj",
       "libraryId": "Microsoft.AspNet.Identity.Core",
       "targetGraphs": [
         "net9.0"
@@ -83,9 +83,9 @@
       "code": "NU1701",
       "level": "Warning",
       "message": "Пакет \"Microsoft.AspNet.Identity.EntityFramework 2.2.4\" был восстановлен с помощью \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1\", а не целевой платформы проекта \"net9.0\". Этот пакет может быть не полностью совместим с вашим проектом.",
-      "projectPath": "c:\\Users\\Ferrum\\intern\\Itransition\\Final\\backend\\DataAccess\\DataAccess.csproj",
+      "projectPath": "C:\\Users\\Ferrum\\intern\\Itransition\\Final\\backend\\DataAccess\\DataAccess.csproj",
       "warningLevel": 1,
-      "filePath": "c:\\Users\\Ferrum\\intern\\Itransition\\Final\\backend\\DataAccess\\DataAccess.csproj",
+      "filePath": "C:\\Users\\Ferrum\\intern\\Itransition\\Final\\backend\\DataAccess\\DataAccess.csproj",
       "libraryId": "Microsoft.AspNet.Identity.EntityFramework",
       "targetGraphs": [
         "net9.0"
