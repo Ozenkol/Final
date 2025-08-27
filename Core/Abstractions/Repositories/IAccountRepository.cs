@@ -5,6 +5,6 @@ namespace Core.Abstractions.Repositories;
 
 public interface IAccountRepository
 {
-    Task<int> Register(User user);
+    Task<int> Register(User user, string password);
     Task<string> Login(User user, string password);
 }

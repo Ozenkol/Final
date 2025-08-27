@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Ferrum\\intern\\Itransition\\Final\\backend\\api\\API.csproj": {}
+    "C:\\Users\\Ferrum\\intern\\Itransition\\Final\\backend\\API\\API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Ferrum\\intern\\Itransition\\Final\\backend\\api\\API.csproj": {
+    "C:\\Users\\Ferrum\\intern\\Itransition\\Final\\backend\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ferrum\\intern\\Itransition\\Final\\backend\\api\\API.csproj",
+        "projectUniqueName": "C:\\Users\\Ferrum\\intern\\Itransition\\Final\\backend\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "C:\\Users\\Ferrum\\intern\\Itransition\\Final\\backend\\api\\API.csproj",
+        "projectPath": "C:\\Users\\Ferrum\\intern\\Itransition\\Final\\backend\\API\\API.csproj",
         "packagesPath": "C:\\Users\\Ferrum\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Ferrum\\intern\\Itransition\\Final\\backend\\api\\obj\\",
+        "outputPath": "C:\\Users\\Ferrum\\intern\\Itransition\\Final\\backend\\API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -343,9 +343,17 @@
               "target": "Package",
               "version": "[9.0.8, )"
             },
+            "Microsoft.IdentityModel.Tokens": {
+              "target": "Package",
+              "version": "[8.14.0, )"
+            },
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
               "version": "[9.0.4, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[8.14.0, )"
             }
           },
           "imports": [

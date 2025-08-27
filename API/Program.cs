@@ -24,7 +24,13 @@ builder.Services.AddDbContext<FinalDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString(nameof(FinalDbContext)))
 );
 
-builder.Services.AddIdentity<UserEntity, IdentityRole>()
+builder.Services.AddIdentity<UserEntity, IdentityRole>(options => {
+    options.Password.RequireDigit = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+
+})
     .AddEntityFrameworkStores<FinalDbContext>();
 
 
@@ -36,6 +42,9 @@ builder.Services.AddScoped<IValuesRepository, ValuesRepository>();
 builder.Services.AddScoped<IValuesService, ValuesService>();
 builder.Services.AddScoped<IProductsRepository, ProductsRepository>();
 builder.Services.AddScoped<IProductsService, ProductsService>();
+builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+builder.Services.AddScoped<IAccountService, AccountService>();
+
 
 
 // builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
