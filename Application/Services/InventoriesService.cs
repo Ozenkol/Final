@@ -13,17 +13,17 @@ public class InventoriesService: IInventoriesService
         _inventoriesRepository = inventoriesRepository;
     }
 
-    public async Task<int> CreateInventory(Inventory inventory)
+    public async Task<Guid> CreateInventory(Inventory inventory)
     {
         return await _inventoriesRepository.CreateInventory(inventory);
     }
 
-    public async Task<int> DeleteInventory(int id)
+    public async Task<Guid> DeleteInventory(Guid id)
     {
         return await _inventoriesRepository.DeleteInventory(id);
     }
 
-    public async Task<Inventory> GetInventory(int id)
+    public async Task<Inventory> GetInventory(Guid id)
     {
         return await _inventoriesRepository.GetInventory(id);
     }
@@ -33,12 +33,12 @@ public class InventoriesService: IInventoriesService
         return await _inventoriesRepository.GetInventoryList();
     }
 
-    public async Task<List<Inventory>> GetUserInventoryList(int userId)
+    public async Task<List<Inventory>> GetUserInventoryList(Guid userId)
     {
         return await _inventoriesRepository.GetUserInventoryList(userId);
     }
 
-    public async Task<int> UpdateInventory(Inventory inventory)
+    public async Task<Guid> UpdateInventory(Inventory inventory)
     {
         return await _inventoriesRepository.UpdateInventory(inventory);
     }

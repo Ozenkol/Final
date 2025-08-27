@@ -20,7 +20,7 @@ public class AccountService : IAccountService
         return await _accountRepository.Login(user, password);
     }
 
-    public async Task<int> Register(User user, string password)
+    public async Task<Guid> Register(User user, string password)
     {
         return await _accountRepository.Register(user, password);
     }

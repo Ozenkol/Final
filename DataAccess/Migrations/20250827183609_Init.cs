@@ -55,9 +55,9 @@ namespace DataAccess.Migrations
                 name: "Inventories",
                 columns: table => new
                 {
-                    InventoryId = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    InventoryName = table.Column<string>(type: "text", nullable: false)
+                    InventoryId = table.Column<Guid>(type: "uuid", nullable: false),
+                    InventoryName = table.Column<string>(type: "text", nullable: false),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -174,16 +174,16 @@ namespace DataAccess.Migrations
                 name: "Fields",
                 columns: table => new
                 {
-                    FieldId = table.Column<int>(type: "integer", nullable: false),
+                    FieldId = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
-                    InventoryId = table.Column<int>(type: "integer", nullable: false)
+                    InventoryId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Fields", x => x.FieldId);
                     table.ForeignKey(
-                        name: "FK_Fields_Inventories_FieldId",
-                        column: x => x.FieldId,
+                        name: "FK_Fields_Inventories_InventoryId",
+                        column: x => x.InventoryId,
                         principalTable: "Inventories",
                         principalColumn: "InventoryId");
                 });
@@ -192,11 +192,11 @@ namespace DataAccess.Migrations
                 name: "Products",
                 columns: table => new
                 {
-                    ProductId = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    ProductId = table.Column<Guid>(type: "uuid", nullable: false),
                     Title = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
-                    InventoryId = table.Column<int>(type: "integer", nullable: false)
+                    InventoryId = table.Column<Guid>(type: "uuid", nullable: false),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -212,11 +212,10 @@ namespace DataAccess.Migrations
                 name: "Values",
                 columns: table => new
                 {
-                    ValueId = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    ValueId = table.Column<Guid>(type: "uuid", nullable: false),
                     Value = table.Column<string>(type: "text", nullable: false),
-                    ProductId = table.Column<int>(type: "integer", nullable: false),
-                    FieldId = table.Column<int>(type: "integer", nullable: false)
+                    ProductId = table.Column<Guid>(type: "uuid", nullable: false),
+                    FieldId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -269,6 +268,11 @@ namespace DataAccess.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Fields_InventoryId",
+                table: "Fields",
+                column: "InventoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_InventoryId",

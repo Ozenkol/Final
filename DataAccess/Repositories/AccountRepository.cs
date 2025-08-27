@@ -53,7 +53,7 @@ public class AccountRepository: IAccountRepository
         return jwtString;
     }
 
-    public async Task<int> Register(User user, string password)
+    public async Task<Guid> Register(User user, string password)
     {
         var userEntity = new UserEntity
         {
@@ -64,7 +64,7 @@ public class AccountRepository: IAccountRepository
             userEntity, password);   
         if (result.Succeeded)            
         {
-            return 1;
+            return new Guid(userEntity.Id);
         }
         else {
             throw new Exception(

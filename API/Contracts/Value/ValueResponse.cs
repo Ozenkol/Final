@@ -7,7 +7,7 @@ namespace API.Contracts.Value
 {
     public record ValueResponse
     (
-        int valueId,
+        Guid valueId,
         string value
     );
 }

@@ -1,7 +1,7 @@
 namespace API.Contracts;
 
 public record ProductResponse(
-    int ProuctId,
+    Guid ProuctId,
     string Title,
     string Description
 );

@@ -19,32 +19,32 @@ namespace Application.Services
         {
             return await _productsRepository.GetProductList();
         }
-        public async Task<Product> GetProduct(int id)
+        public async Task<Product> GetProduct(Guid id)
         {
             return await _productsRepository.GetProduct(id);
         }
 
-        public async Task<List<Product>> GetInventoryProductList(int inventoryId)
+        public async Task<List<Product>> GetInventoryProductList(Guid inventoryId)
         {
             return await _productsRepository.GetInventoryProductList(inventoryId);
         }
 
-        public async Task<List<Product>> GetUserProductList(int userId)
+        public async Task<List<Product>> GetUserProductList(Guid userId)
         {
             return await _productsRepository.GetUserProductList(userId);
         }
 
-        public async Task<int> CreateProduct(Product product)
+        public async Task<Guid> CreateProduct(Product product)
         {
             return await _productsRepository.CreateProduct(product);
         }
 
-        public async Task<int> DeleteProduct(int id)
+        public async Task<Guid> DeleteProduct(Guid id)
         {
             return await _productsRepository.DeleteProduct(id);
         }
 
-        public async Task<int> UpdateProduct(Product product)
+        public async Task<Guid> UpdateProduct(Product product)
         {
             return await _productsRepository.UpdateProduct(product);
         }

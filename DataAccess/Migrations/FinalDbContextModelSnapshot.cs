@@ -24,14 +24,12 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("DataAccess.Entities.FieldEntity", b =>
                 {
-                    b.Property<int>("FieldId")
+                    b.Property<Guid>("FieldId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("uuid");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("FieldId"));
-
-                    b.Property<int>("InventoryId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("InventoryId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -46,18 +44,16 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("DataAccess.Entities.InventoryEntity", b =>
                 {
-                    b.Property<int>("InventoryId")
+                    b.Property<Guid>("InventoryId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("InventoryId"));
+                        .HasColumnType("uuid");
 
                     b.Property<string>("InventoryName")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("InventoryId");
 
@@ -66,25 +62,23 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("DataAccess.Entities.ProductEntity", b =>
                 {
-                    b.Property<int>("ProductId")
+                    b.Property<Guid>("ProductId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ProductId"));
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("InventoryId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("InventoryId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("ProductId");
 
@@ -159,17 +153,15 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("DataAccess.Entities.ValueEntity", b =>
                 {
-                    b.Property<int>("ValueId")
+                    b.Property<Guid>("ValueId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("uuid");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ValueId"));
+                    b.Property<Guid>("FieldId")
+                        .HasColumnType("uuid");
 
-                    b.Property<int>("FieldId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Value")
                         .IsRequired()

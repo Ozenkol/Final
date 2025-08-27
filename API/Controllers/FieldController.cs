@@ -17,7 +17,7 @@ public class FieldController : ControllerBase
         _inventoriesService = inventoriesService;
     }
     [HttpGet]
-    public async Task<ActionResult<List<FieldResponse>>> GetInventoryFields(int key)
+    public async Task<ActionResult<List<FieldResponse>>> GetInventoryFields(Guid key)
     {
         var inventory =  await _inventoriesService.GetInventory(key);
         var fields = await _fieldsService.GetInventoryFields(inventory.InventoryId);
@@ -30,7 +30,7 @@ public class FieldController : ControllerBase
         var inventory = await _inventoriesService.GetInventory(fieldRequest.InventoryId);
 
         var field = new Field(
-            id: -1,
+            fieldId: Guid.Empty,
             fieldName: fieldRequest.Name,
             inventoryId: fieldRequest.InventoryId
         );

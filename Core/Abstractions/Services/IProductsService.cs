@@ -14,9 +14,9 @@ namespace Core.Abstractions.Services
         Task<List<Product>> GetProductList();
         Task<List<Product>> GetInventoryProductList(Guid inventoryId);
         Task<List<Product>> GetUserProductList(Guid userId);
-        Task<int> CreateProduct(Product product);
-        Task<int> DeleteProduct(Guid id);
-        Task<int> UpdateProduct(Product product);
+        Task<Guid> CreateProduct(Product product);
+        Task<Guid> DeleteProduct(Guid id);
+        Task<Guid> UpdateProduct(Product product);
     }
 
 }

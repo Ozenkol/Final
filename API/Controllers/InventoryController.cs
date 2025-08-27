@@ -4,6 +4,7 @@ using Core.Abstractions.Services;
 using Core.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers;
 [Route("[controller]")] 
@@ -23,6 +24,8 @@ public class InventoryController: ControllerBase
         var inventoriesResponse = inventories.Select(i => new InventoryResponse(i.InventoryId, i.InventoryName));
         return Ok(inventoriesResponse);
     }
+
+    [Authorize]
     [HttpGet("{id}")]
     public async Task<ActionResult<InventoryResponse>> GetInventory(Guid id)
     {
@@ -31,8 +34,10 @@ public class InventoryController: ControllerBase
         var inventoryResponse = new InventoryResponse(inventory.InventoryId, inventory.InventoryName);
         return Ok(inventoryResponse);
     }
+
+    [Authorize]
     [HttpPost]
-    public async Task<ActionResult<int>> Post([FromBody]InventoryRequest inventoryRequest)
+    public async Task<ActionResult<Guid>> Post([FromBody]InventoryRequest inventoryRequest)
     {
         var ok = await _inventoriesService.CreateInventory(Inventory.Create(Guid.Empty,inventoryRequest.Title).inventory);
         return Ok(ok);

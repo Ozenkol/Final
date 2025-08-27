@@ -18,7 +18,7 @@ namespace API.Controllers
             _valuesService = valuesService;
         }
         [HttpGet("products/{productId}/field/{fieldId}")]
-        public async Task<ValueResponse> GetFieldValueOfProduct(int fieldId, int productId) {
+        public async Task<ValueResponse> GetFieldValueOfProduct(Guid fieldId, Guid productId) {
             var valueModel = await _valuesService.GetFieldValueOfProduct(fieldId, productId);
             return new ValueResponse(valueModel.ValueId, valueModel.FieldValue);
         }

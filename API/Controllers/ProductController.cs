@@ -25,7 +25,7 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ProductResponse>> GetProduct(int id) {
+        public async Task<ActionResult<ProductResponse>> GetProduct(Guid id) {
             var product = await _productsService.GetProduct(id);
             var productResponse = new ProductResponse(product.ProductId, product.Title, product.Description);
             return Ok(productResponse);

@@ -10,21 +10,21 @@ public class FieldsService : IFieldsService
     public FieldsService(IFieldsRepository fieldsRepository) {
         _fieldsRepository = fieldsRepository;
     }
-    public async Task<int> CreateField(int inventoryId, Field field)
+    public async Task<Guid> CreateField(Guid inventoryId, Field field)
     {
         return await _fieldsRepository.CreateField(inventoryId, field);
     }
-    public async Task<int> DeleteField(int id)
+    public async Task<Guid> DeleteField(Guid id)
     {
         return await _fieldsRepository.DeleteField(id);
     }
 
-    public async Task<List<Field>> GetInventoryFields(int inventoryId)
+    public async Task<List<Field>> GetInventoryFields(Guid inventoryId)
     {
         return await _fieldsRepository.GetInventoryFields(inventoryId);
     }
 
-    public async Task<int> UpdateField(Field field)
+    public async Task<Guid> UpdateField(Field field)
     {
         return await _fieldsRepository.UpdateField(field);
     }

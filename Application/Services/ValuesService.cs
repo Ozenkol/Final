@@ -18,7 +18,7 @@ namespace Application.Services
         {
             _valuesRepository = valuesRepository;
         }
-        public async Task<Value> GetFieldValueOfProduct(int fieldId, int productId)
+        public async Task<Value> GetFieldValueOfProduct(Guid fieldId, Guid productId)
         {
             return await _valuesRepository.GetFieldValueOfProduct(fieldId, productId);
         }
