@@ -22,7 +22,7 @@ namespace API.Controllers
 
         [HttpPost]
         // [ResponseCache(CacheProfileName = "NoCache")]
-        public async Task<ActionResult<int>> Register([FromBody] RegisterRequest registerRequest)   
+        public async Task<ActionResult<Guid>> Register([FromBody] RegisterRequest registerRequest)   
         {
             var user = new User{
                 UserName = registerRequest.UserName,

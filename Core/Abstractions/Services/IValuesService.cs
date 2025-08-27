@@ -8,6 +8,6 @@ namespace Core.Abstractions.Services
 {
     public interface IValuesService
     {
-        Task<Value> GetFieldValueOfProduct(int fieldId, int productId);
+        Task<Value> GetFieldValueOfProduct(Guid fieldId, Guid productId);
     }
 }

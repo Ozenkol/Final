@@ -13,7 +13,7 @@ namespace DataAccess.Repositories
             _context = context;
         }
 
-        public async Task<int> CreateFieldValueOfProduct(Value value, int fieldId, int productId)
+        public async Task<Guid> CreateFieldValueOfProduct(Value value, Guid fieldId, Guid productId)
         {
             var valueEntity = new ValueEntity
             {
@@ -26,18 +26,18 @@ namespace DataAccess.Repositories
             return valueEntity.ValueId;
         }
 
-        public async Task<int> DeleteFieldValueOfProduct(int valueId)
+        public async Task<Guid> DeleteFieldValueOfProduct(Guid valueId)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<Value> GetFieldValueOfProduct(int fieldId, int productId)
+        public async Task<Value> GetFieldValueOfProduct(Guid fieldId, Guid productId)
         {
             var valueEntity = await _context.Values.AsNoTracking().FirstAsync(v => v.FieldId == fieldId && v.ProductId == productId);
             return Value.Create(valueEntity.ValueId, valueEntity.Value, valueEntity.ProductId, valueEntity.FieldId).value;
         }
 
-        public async Task<int> UpdateFieldValueOfProduct(Value value)
+        public async Task<Guid> UpdateFieldValueOfProduct(Value value)
         {
             throw new NotImplementedException();
         }

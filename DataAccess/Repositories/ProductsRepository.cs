@@ -19,7 +19,7 @@ public class ProductsRepository : IProductsRepository
         var products = productsEntites.Select(p => Product.Create(p.ProductId, p.Title, p.Description, p.InventoryId).product).ToList();
         return products;
     }
-    public async Task<int> CreateProduct(Product product)
+    public async Task<Guid> CreateProduct(Product product)
     {
         var productEntity = new ProductEntity
         {
@@ -32,38 +32,38 @@ public class ProductsRepository : IProductsRepository
         return productEntity.ProductId;
     }
 
-    public async Task<Product> GetProduct(int id)
+    public async Task<Product> GetProduct(Guid id)
     {
         var productEntity = await _context.Products.AsNoTracking().FirstAsync(i => i.ProductId == id);
         var product = Product.Create(productEntity.ProductId, productEntity.Title, productEntity.Description, productEntity.InventoryId).product;
         return product;
     }
 
-    public async Task<List<Product>> GetInventoryProductList(int inventoryId)
+    public async Task<List<Product>> GetInventoryProductList(Guid inventoryId)
     {
         var productEntityList = await _context.Products.AsNoTracking().Where(p => p.InventoryId == inventoryId).ToListAsync();
         var productList = productEntityList.Select(i => Product.Create(i.InventoryId, i.Title, i.Description, i.InventoryId).product).ToList();
         return productList;
     }
 
-    public async Task<List<Product>> GetUserProductList(int userId)
+    public async Task<List<Product>> GetUserProductList(Guid userId)
     {
         var productEntityList = await _context.Products.AsNoTracking().Where(p => p.UserId == userId).ToListAsync();
         var productList = productEntityList.Select(i => Product.Create(i.InventoryId, i.Title, i.Description, i.InventoryId).product).ToList();
         return productList;
     }
 
-    public async Task<int> DeleteProduct(int id)
+    public async Task<Guid> DeleteProduct(Guid id)
     {
         var product = await _context.Products.AsNoTracking().FirstAsync(i => i.ProductId == id);
         if (product != null) {
             await _context.Products.AsNoTracking().Where(i => i.UserId == id).ExecuteDeleteAsync();
             return product.ProductId;
         }
-        return -1;
+        return Guid.Empty;
     }
 
-    public async Task<int> UpdateProduct(Product product)
+    public async Task<Guid> UpdateProduct(Product product)
     {
         var productEntity = new ProductEntity
         {

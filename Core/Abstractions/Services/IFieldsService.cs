@@ -4,12 +4,12 @@ namespace Core.Abstractions.Services;
 
 public interface IFieldsService
 {
-    Task<List<Field>> GetInventoryFields(int inventoryId);
-    Task<int> CreateField(int inventoryId, Field field);
+    Task<List<Field>> GetInventoryFields(Guid inventoryId);
+    Task<Guid> CreateField(Guid inventoryId, Field field);
 
-    Task<int> UpdateField(Field field);
+    Task<Guid> UpdateField(Field field);
 
-    Task<int> DeleteField(int id);
+    Task<Guid> DeleteField(Guid id);
 
 
 }

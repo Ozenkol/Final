@@ -2,22 +2,22 @@ namespace Core.Models;
 
 public class Value
 {
-        public int ValueId {get;set;}
+        public Guid ValueId {get;set;}
         public string FieldValue { get; set; } = string.Empty;
 
-        public int ProductId { get; set; }
+        public Guid ProductId { get; set; }
         public Product ?Product { get; set; }
 
-        public int FieldId { get; set; }
+        public Guid FieldId { get; set; }
         public Field ?Field { get; set; }
 
-        public Value(int id, string value, int productId, int fieldId) {
+        public Value(Guid id, string value, Guid productId, Guid fieldId) {
                 ValueId = id;
                 FieldValue = value;
                 ProductId = productId;
                 FieldId = fieldId;
         }
-        public static (Value value, string error) Create(int id, string fieldValue, int productId, int fieldId) {
+        public static (Value value, string error) Create(Guid id, string fieldValue, Guid productId, Guid fieldId) {
         var error = string.Empty;
         if (string.IsNullOrEmpty(fieldValue)) {
             error = "Value must be filled";

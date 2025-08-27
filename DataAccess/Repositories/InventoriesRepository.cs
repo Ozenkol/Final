@@ -16,12 +16,12 @@ public class InventoriesRepository: IInventoriesRepository
         var inventories = inventoryEntities.Select(i => Inventory.Create(i.InventoryId, i.InventoryName).inventory).ToList();
         return inventories;
     }
-    public async Task<Inventory> GetInventory(int id) {
+    public async Task<Inventory> GetInventory(Guid id) {
         var inventoryEntity = await _context.Inventories.AsNoTracking().FirstAsync(i => i.InventoryId == id);
         var inventory = Inventory.Create(inventoryEntity.InventoryId, inventoryEntity.InventoryName).inventory;
         return inventory;
     }
-    public async Task<int> CreateInventory(Inventory inventory) {
+    public async Task<Guid> CreateInventory(Inventory inventory) {
         var inventoryEntity = new InventoryEntity
         {
             InventoryName = inventory.InventoryName
@@ -30,17 +30,17 @@ public class InventoriesRepository: IInventoriesRepository
         await _context.SaveChangesAsync();
         return inventoryEntity.InventoryId;
     }
-    public async Task<int> DeleteInventory(int id)
+    public async Task<Guid> DeleteInventory(Guid id)
     {
         var inventory = await _context.Inventories.AsNoTracking().FirstAsync(i => i.InventoryId == id);
         if (inventory != null) {
             await _context.Inventories.AsNoTracking().Where(i => i.InventoryId == id).ExecuteDeleteAsync();
             return inventory.InventoryId;
         }
-        return -1;
+        return Guid.Empty;
     }
 
-    public async Task<int> UpdateInventory(Inventory inventory)
+    public async Task<Guid> UpdateInventory(Inventory inventory)
     {
         var inventoryEntity = new InventoryEntity
         {
@@ -51,7 +51,7 @@ public class InventoriesRepository: IInventoriesRepository
         return inventoryEntity.InventoryId;
     }
 
-    public async Task<List<Inventory>> GetUserInventoryList(int userId)
+    public async Task<List<Inventory>> GetUserInventoryList(Guid userId)
     {
         var inventoryEntities = await _context.Inventories.AsNoTracking().Where(i => i.UserId == userId).ToListAsync();
         var inventories = inventoryEntities.Select(i => Inventory.Create(i.InventoryId, i.InventoryName).inventory).ToList();

@@ -2,17 +2,17 @@ namespace Core.Models;
 
 public class Field
 {
-    public int FieldId { get; set; }
+    public Guid FieldId { get; set; }
     public string Name { get; set; } = string.Empty;
-    public int InventoryId { get; set; }
-    public Field(int id, string fieldName, int inventoryId)
+    public Guid InventoryId { get; set; }
+    public Field(Guid fieldId, string fieldName, Guid inventoryId)
     {
-        InventoryId = id;
+        InventoryId = fieldId;
         Name = fieldName;
         InventoryId = inventoryId;
     }
 
-    public static (Field field, string Error) Create(int id, string fieldName, int inventoryId)
+    public static (Field field, string Error) Create(Guid id, string fieldName, Guid inventoryId)
     {
         var error = string.Empty;
         if (string.IsNullOrEmpty(fieldName))

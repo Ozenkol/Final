@@ -24,7 +24,7 @@ public class AccountRepository: IAccountRepository
     {
         var userEntity = await _userManager.FindByNameAsync(user.UserName);
 
-        if (user == null || !await _userManager.CheckPasswordAsync(userEntity, password))
+        if (userEntity == null || !await _userManager.CheckPasswordAsync(userEntity, password))
         {
             throw new Exception("Invalid login attempt.");
         }
@@ -36,7 +36,8 @@ public class AccountRepository: IAccountRepository
 
         var claims = new List<Claim>
         {
-            new Claim(ClaimTypes.Name, user.UserName)
+            new Claim(ClaimTypes.Name, userEntity.UserName),
+            new Claim(ClaimTypes.NameIdentifier, userEntity.Id),
         };
 
         var jwtObject = new JwtSecurityToken(

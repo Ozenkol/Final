@@ -8,10 +8,10 @@ namespace Core.Abstractions.Repositories
 {
     public interface IValuesRepository
     {
-        Task<Value> GetFieldValueOfProduct(int fieldId, int productId);
-        Task<int> CreateFieldValueOfProduct(Value value, int fieldId, int productId);
-        Task<int> UpdateFieldValueOfProduct(Value value);
-        Task<int> DeleteFieldValueOfProduct(int valueId);
+        Task<Value> GetFieldValueOfProduct(Guid fieldId, Guid productId);
+        Task<Guid> CreateFieldValueOfProduct(Value value, Guid fieldId, Guid productId);
+        Task<Guid> UpdateFieldValueOfProduct(Value value);
+        Task<Guid> DeleteFieldValueOfProduct(Guid valueId);
 
     }
 

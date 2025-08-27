@@ -10,9 +10,9 @@ namespace DataAccess.Entities
 {
     public class FieldEntity
     {
-        public int FieldId { get; set; }
+        public Guid FieldId { get; set; }
         public string Name { get; set; } = string.Empty;
-        public int InventoryId { get; set; }
+        public Guid InventoryId { get; set; }
         public InventoryEntity ?Inventory { get; set; }
         public ICollection<ValueEntity> Values = new List<ValueEntity>();
 

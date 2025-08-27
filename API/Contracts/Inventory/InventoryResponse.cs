@@ -2,6 +2,6 @@ namespace API.Contracts;
 
 public record InventoryResponse
 (
-    int InventoryId,
+    Guid InventoryId,
     string InventoryName
 );

@@ -10,12 +10,12 @@ namespace Core.Abstractions.Services
 {
     public interface IProductsService
     {
-        Task<Product> GetProduct(int id);
+        Task<Product> GetProduct(Guid id);
         Task<List<Product>> GetProductList();
-        Task<List<Product>> GetInventoryProductList(int inventoryId);
-        Task<List<Product>> GetUserProductList(int userId);
+        Task<List<Product>> GetInventoryProductList(Guid inventoryId);
+        Task<List<Product>> GetUserProductList(Guid userId);
         Task<int> CreateProduct(Product product);
-        Task<int> DeleteProduct(int id);
+        Task<int> DeleteProduct(Guid id);
         Task<int> UpdateProduct(Product product);
     }
 
