@@ -13,18 +13,19 @@ public class InventoriesRepository: IInventoriesRepository
     }
     public async Task<List<Inventory>> GetInventoryList() {
         var inventoryEntities = await _context.Inventories.AsNoTracking().ToListAsync();
-        var inventories = inventoryEntities.Select(i => Inventory.Create(i.InventoryId, i.InventoryName).inventory).ToList();
+        var inventories = inventoryEntities.Select(i => Inventory.Create(i.InventoryId, i.InventoryName, i.UserId).inventory).ToList();
         return inventories;
     }
     public async Task<Inventory> GetInventory(Guid id) {
         var inventoryEntity = await _context.Inventories.AsNoTracking().FirstAsync(i => i.InventoryId == id);
-        var inventory = Inventory.Create(inventoryEntity.InventoryId, inventoryEntity.InventoryName).inventory;
+        var inventory = Inventory.Create(inventoryEntity.InventoryId, inventoryEntity.InventoryName, inventoryEntity.UserId).inventory;
         return inventory;
     }
     public async Task<Guid> CreateInventory(Inventory inventory) {
         var inventoryEntity = new InventoryEntity
         {
-            InventoryName = inventory.InventoryName
+            InventoryName = inventory.InventoryName,
+            UserId = inventory.UserId
         };
         await _context.Inventories.AddAsync(inventoryEntity);
         await _context.SaveChangesAsync();
@@ -44,6 +45,7 @@ public class InventoriesRepository: IInventoriesRepository
     {
         var inventoryEntity = new InventoryEntity
         {
+            UserId = inventory.UserId,
             InventoryId = inventory.InventoryId,
             InventoryName = inventory.InventoryName
         };
@@ -54,7 +56,7 @@ public class InventoriesRepository: IInventoriesRepository
     public async Task<List<Inventory>> GetUserInventoryList(Guid userId)
     {
         var inventoryEntities = await _context.Inventories.AsNoTracking().Where(i => i.UserId == userId).ToListAsync();
-        var inventories = inventoryEntities.Select(i => Inventory.Create(i.InventoryId, i.InventoryName).inventory).ToList();
+        var inventories = inventoryEntities.Select(i => Inventory.Create(i.InventoryId, i.InventoryName, i.UserId).inventory).ToList();
         return inventories;
     }
 }

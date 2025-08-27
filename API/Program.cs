@@ -60,13 +60,22 @@ builder.Services.AddIdentity<UserEntity, IdentityRole>(options => {
 })
     .AddEntityFrameworkStores<FinalDbContext>();
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+builder.Services.AddAuthentication(options => {
+    options.DefaultAuthenticateScheme =
+    options.DefaultChallengeScheme =
+    options.DefaultForbidScheme =
+    options.DefaultScheme =
+    options.DefaultSignInScheme =
+    options.DefaultSignOutScheme =
+    JwtBearerDefaults.AuthenticationScheme;
+})
     .AddJwtBearer(options => {   
         options.TokenValidationParameters = new TokenValidationParameters   
         {
             ValidateIssuer = true,
             ValidIssuer = builder.Configuration["JWT:Issuer"],
             ValidateAudience = true,
+            ValidateLifetime = true,
             ValidAudience = builder.Configuration["JWT:Audience"],
             ValidateIssuerSigningKey = true,
             IssuerSigningKey = new SymmetricSecurityKey(
@@ -75,9 +84,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     }
 );
-
-
-builder.Services.AddAuthorization();
 
 
 builder.Services.AddScoped<IInventoriesRepository, InventoriesRepository>();
