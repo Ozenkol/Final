@@ -40,10 +40,9 @@ public class InventoryController: ControllerBase
         }
         return Unauthorized();
     }
-
+    
+    [Authorize]
     [HttpPost]
-    [Produces("application/json")]
-
     public async Task<ActionResult<Guid>> Post([FromBody]InventoryRequest inventoryRequest)
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
