@@ -18,6 +18,12 @@ namespace Application.Services
         {
             _valuesRepository = valuesRepository;
         }
+
+        public async Task<Guid> CreateValue(Guid fieldId, Guid productId, Value value)
+        {
+            return await _valuesRepository.CreateFieldValueOfProduct(value, fieldId, productId);
+        }
+
         public async Task<Value> GetFieldValueOfProduct(Guid fieldId, Guid productId)
         {
             return await _valuesRepository.GetFieldValueOfProduct(fieldId, productId);

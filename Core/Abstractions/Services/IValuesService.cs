@@ -9,5 +9,6 @@ namespace Core.Abstractions.Services
     public interface IValuesService
     {
         Task<Value> GetFieldValueOfProduct(Guid fieldId, Guid productId);
+        Task<Guid> CreateValue(Guid fieldId, Guid productId, Value value);
     }
 }
