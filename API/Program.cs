@@ -103,10 +103,20 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowLocalhost",
         policy =>
         {
-            policy.WithOrigins("http://localhost:6006")
+            policy.WithOrigins("http://localhost:3000")
                   .AllowAnyMethod()
-                  .AllowAnyHeader();
+                  .AllowAnyHeader()
+                  .AllowCredentials();  
         });
+    options.AddPolicy("AllowNetlifyHost",
+    policy =>
+        {
+            policy.WithOrigins("https://itransitionfrontend.netlify.app")
+                  .AllowAnyMethod()
+                  .AllowAnyHeader()
+                  .AllowCredentials();
+        }
+    );
 });
 
 
@@ -123,16 +133,21 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseCors("AllowLocalhost");
+app.UseCors("AllowNetlifyHost");
+
+
 app.Use(async (context, next) =>
 {
         var token = context.Request.Cookies[".AspNetCore.Application.Id"];
         if (!string.IsNullOrEmpty(token))
                 context.Request.Headers.Add("Authorization", "Bearer " + token);
  
-        await next();
         context.Response.Headers.Add("X-Content-Type-Options", "nosniff");
         context.Response.Headers.Add("X-Xss-Protection", "1");
         context.Response.Headers.Add("X-Frame-Options", "DENY");
+        
+        await next();
 
 });
 

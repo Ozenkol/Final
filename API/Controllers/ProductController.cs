@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("[controller]/[action]")]
     public class ProductController : ControllerBase
     {
         private readonly IProductsService _productsService;
@@ -28,6 +28,14 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<List<ProductResponse>>> GetProductList() {
             var productList = await _productsService.GetProductList();
+            var productListResponse = productList.Select(i => new ProductResponse(i.ProductId, i.Title, i.Description)).ToList();
+            return productListResponse;
+        }
+
+        [Authorize]
+        [HttpGet("{id}")]
+        public async Task<ActionResult<List<ProductResponse>>>GetInventoryProductList(Guid id) {
+            var productList = await _productsService.GetInventoryProductList(id);
             var productListResponse = productList.Select(i => new ProductResponse(i.ProductId, i.Title, i.Description)).ToList();
             return productListResponse;
         }
