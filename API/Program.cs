@@ -124,8 +124,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseCors("AllowLocalhost");
-app.UseCors("AllowNetlifyHost");
+app.UseCors("FrontendPolicy");
 
 
 app.Use(async (context, next) =>
