@@ -38,7 +38,14 @@ namespace API.Controllers
             {
                 UserName = loginRequest.UserName
             };
-            return await _accountService.Login(user, loginRequest.Password);
+            var token = await _accountService.Login(user, loginRequest.Password);
+            if (!string.IsNullOrEmpty(token))
+                HttpContext.Response.Cookies.Append(".AspNetCore.Application.Id", token, 
+                new CookieOptions
+                {
+                    MaxAge = TimeSpan.FromMinutes(60)
+            });
+            return token;
         }
     }
 }

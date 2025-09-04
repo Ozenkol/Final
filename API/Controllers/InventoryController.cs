@@ -9,7 +9,7 @@ using System.Security.Claims;
 
 
 namespace API.Controllers;
-[Route("[controller]")] 
+[Route("[controller]/[action]")] 
 [ApiController]
 
 public class InventoryController: ControllerBase
@@ -20,13 +20,15 @@ public class InventoryController: ControllerBase
     }
 
     [Authorize]
-    [HttpGet("users/{userId}/inventories")]
-    public async Task<ActionResult<List<InventoryResponse>>> GetUserInventoryList(Guid userId)
+    [HttpGet]
+    public async Task<ActionResult<List<InventoryResponse>>> GetUserInventoryList()
     {
-        var inventories = await _inventoriesService.GetUserInventoryList(userId);
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        var inventories = await _inventoriesService.GetUserInventoryList(new Guid(userId));
         var inventoriesResponse = inventories.Select(i => new InventoryResponse(i.InventoryId, i.InventoryName));
         return Ok(inventoriesResponse);
     }
+    
     
     [Authorize]
     [HttpGet("{id}")]
@@ -43,7 +45,7 @@ public class InventoryController: ControllerBase
     
     [Authorize]
     [HttpPost]
-    public async Task<ActionResult<Guid>> Post([FromBody]InventoryRequest inventoryRequest)
+    public async Task<ActionResult<Guid>> CreateInventory([FromBody]InventoryRequest inventoryRequest)
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
         if (userId != null) {

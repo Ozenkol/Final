@@ -123,6 +123,19 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.Use(async (context, next) =>
+{
+        var token = context.Request.Cookies[".AspNetCore.Application.Id"];
+        if (!string.IsNullOrEmpty(token))
+                context.Request.Headers.Add("Authorization", "Bearer " + token);
+ 
+        await next();
+        context.Response.Headers.Add("X-Content-Type-Options", "nosniff");
+        context.Response.Headers.Add("X-Xss-Protection", "1");
+        context.Response.Headers.Add("X-Frame-Options", "DENY");
+
+});
+
 app.UseAuthentication();    
 app.UseAuthorization();
 
