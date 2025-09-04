@@ -113,9 +113,10 @@ builder.Services.AddCors(options =>
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.Cookie.HttpOnly = true;
-    options.Cookie.SecurePolicy = CookieSecurePolicy.Always; // always HTTPS
-    options.Cookie.SameSite = SameSiteMode.None; // allow cross-site
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always; // HTTPS only
+    options.Cookie.SameSite = SameSiteMode.None;             // allow cross-site
 });
+
 
 
 
