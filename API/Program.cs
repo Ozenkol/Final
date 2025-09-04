@@ -100,23 +100,14 @@ builder.Services.AddScoped<IAccountService, AccountService>();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowLocalhost",
+    options.AddPolicy("FrontendPolicy",
         policy =>
         {
-            policy.WithOrigins("http://localhost:3000")
+            policy.WithOrigins("http://localhost:3000", "https://itransitionfrontend.netlify.app")
                   .AllowAnyMethod()
                   .AllowAnyHeader()
                   .AllowCredentials();  
         });
-    options.AddPolicy("AllowNetlifyHost",
-    policy =>
-        {
-            policy.WithOrigins("https://itransitionfrontend.netlify.app")
-                  .AllowAnyMethod()
-                  .AllowAnyHeader()
-                  .AllowCredentials();
-        }
-    );
 });
 
 
