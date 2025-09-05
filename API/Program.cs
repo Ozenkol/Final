@@ -117,7 +117,9 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.Cookie.SameSite = SameSiteMode.None;
     options.ExpireTimeSpan = TimeSpan.FromDays(7); // keep cookie
     options.SlidingExpiration = true;
-
+    options.Cookie.SecurePolicy = builder.Environment.IsDevelopment()
+        ? CookieSecurePolicy.None
+        : CookieSecurePolicy.Always;
 });
 
 
@@ -148,7 +150,6 @@ app.Use(async (context, next) =>
         context.Response.Headers["X-Content-Type-Options"] = "nosniff";
         context.Response.Headers["X-Xss-Protection"] = "1";
         context.Response.Headers["X-Frame-Options"] = "DENY";
-  
         
         await next();
 
