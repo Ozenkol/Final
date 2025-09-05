@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using API.Contracts;
 using API.Contracts.Account;
 using Core.Abstractions.Services;
 using Core.Models;
@@ -32,20 +33,24 @@ namespace API.Controllers
         }
         [HttpPost]
         // [ResponseCache(CacheProfileName = "NoCache")]
-        public async Task<ActionResult<string>> Login([FromBody] LoginRequest loginRequest)    
+        public async Task<ActionResult<UserResponse>> Login([FromBody] LoginRequest loginRequest)    
         {
             var user = new User
             {
                 UserName = loginRequest.UserName
             };
-            var token = await _accountService.Login(user, loginRequest.Password);
-            if (!string.IsNullOrEmpty(token))
-                HttpContext.Response.Cookies.Append(".AspNetCore.Application.Id", token, 
+            var loginUser = await _accountService.Login(user, loginRequest.Password);
+            if (!string.IsNullOrEmpty(loginUser.Token))
+            {
+                HttpContext.Response.Cookies.Append(".AspNetCore.Application.Id", loginUser.Token,
                 new CookieOptions
                 {
                     MaxAge = TimeSpan.FromMinutes(60)
-            });
-            return token;
+                });
+                var userRecord = new UserResponse(loginUser.UserName);
+                return Ok(userRecord);
+            }
+            return Forbid();
         }
     }
 }

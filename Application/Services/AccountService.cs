@@ -15,7 +15,7 @@ public class AccountService : IAccountService
         _accountRepository = accountRepository;
     }
 
-    public async Task<string> Login(User user, string password)
+    public async Task<User> Login(User user, string password)
     {
         return await _accountRepository.Login(user, password);
     }

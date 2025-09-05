@@ -20,7 +20,7 @@ public class AccountRepository: IAccountRepository
         _configuration = configuration;
     }
 
-    public async Task<string> Login(User user, string password)
+    public async Task<User> Login(User user, string password)
     {
         var userEntity = await _userManager.FindByNameAsync(user.UserName);
 
@@ -50,7 +50,12 @@ public class AccountRepository: IAccountRepository
 
         var jwtString = new JwtSecurityTokenHandler().WriteToken(jwtObject);
 
-        return jwtString;
+        var loginUser = new User{
+            UserName = userEntity.UserName,
+            Token = jwtString.ToString()
+        };
+
+        return loginUser;
     }
 
     public async Task<Guid> Register(User user, string password)
