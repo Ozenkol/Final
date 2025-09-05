@@ -144,8 +144,8 @@ app.UseCors("FrontendPolicy");
 app.Use(async (context, next) =>
 {
         var token = context.Request.Cookies[".AspNetCore.Application.Id"];
-        // if (!string.IsNullOrEmpty(token)) 
-        //     context.Request.Headers["Authorization"] = "Bearer " + token;
+        if (!string.IsNullOrEmpty(token)) 
+            context.Request.Headers["Authorization"] = "Bearer " + token;
  
         context.Response.Headers["X-Content-Type-Options"] = "nosniff";
         context.Response.Headers["X-Xss-Protection"] = "1";
