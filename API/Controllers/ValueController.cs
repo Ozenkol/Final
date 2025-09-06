@@ -15,19 +15,16 @@ namespace API.Controllers
     public class ValueController : ControllerBase
     {
         private readonly IValuesService _valuesService;
-        public ValueController(IValuesService valuesService) {
+        public ValueController(IValuesService valuesService)
+        {
             _valuesService = valuesService;
         }
 
-        [HttpGet("products/{productId}/field/{fieldId}")]
-        public async Task<ActionResult<ValueResponse>> GetFieldValueOfProduct(Guid fieldId, Guid productId) {
-            var valueModel = await _valuesService.GetFieldValueOfProduct(fieldId, productId);
-            return new ValueResponse(valueModel.ValueId, valueModel.FieldValue);
-        }
-
         [HttpPost]
-        public async Task<ActionResult<Guid>> CreateFieldValueOfProduct([FromBody] ValueRequest valueRequest) {
-            var value = await _valuesService.CreateValue(valueRequest.fieldId, valueRequest.productId, Value.Create(Guid.Empty, valueRequest.value, valueRequest.fieldId, valueRequest.productId).value);
+        [Route("/api/inventories/{inventoryId}/products/{productId}/values")]
+        public async Task<ActionResult<Guid>> CreateFieldValueOfProduct(Guid inventoryId, Guid productId, [FromBody] ValueRequest valueRequest)
+        {
+            var value = await _valuesService.CreateValue(valueRequest.fieldId, productId, Value.Create(Guid.Empty, valueRequest.value, valueRequest.fieldId, productId).value);
             return Ok(value);
         }
 

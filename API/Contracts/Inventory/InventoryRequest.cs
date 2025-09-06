@@ -1,5 +1,5 @@
 namespace API.Contracts;
 
 public record InventoryRequest(
-    string Title
+    string title
 );

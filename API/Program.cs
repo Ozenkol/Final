@@ -4,9 +4,9 @@ using Core.Abstractions.Services;
 using DataAccess;
 using DataAccess.Repositories;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;   
+using Microsoft.AspNetCore.Identity;
 using DataAccess.Entities;
-using Microsoft.AspNetCore.Authentication.JwtBearer;   
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
@@ -16,8 +16,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
-builder.Services.AddSwaggerGen(options => {
-    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme   
+builder.Services.AddSwaggerGen(options =>
+{
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         In = ParameterLocation.Header,
         Description = "Please enter token",
@@ -26,7 +27,7 @@ builder.Services.AddSwaggerGen(options => {
         BearerFormat = "JWT",
         Scheme = "bearer"
     });
-    options.AddSecurityRequirement(new OpenApiSecurityRequirement    
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
     {
         new OpenApiSecurityScheme
@@ -40,9 +41,9 @@ builder.Services.AddSwaggerGen(options => {
     Array.Empty<string>()
     }
     });
-}); 
+});
 
-builder.Services.AddControllers();   
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
 
@@ -51,7 +52,8 @@ builder.Services.AddDbContext<FinalDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString(nameof(FinalDbContext)))
 );
 
-builder.Services.AddIdentity<UserEntity, IdentityRole>(options => {
+builder.Services.AddIdentity<UserEntity, IdentityRole>(options =>
+{
     options.Password.RequireDigit = false;
     options.Password.RequireLowercase = false;
     options.Password.RequireUppercase = false;
@@ -60,7 +62,8 @@ builder.Services.AddIdentity<UserEntity, IdentityRole>(options => {
 })
     .AddEntityFrameworkStores<FinalDbContext>();
 
-builder.Services.AddAuthentication(options => {
+builder.Services.AddAuthentication(options =>
+{
     options.DefaultAuthenticateScheme =
     options.DefaultChallengeScheme =
     options.DefaultForbidScheme =
@@ -69,8 +72,9 @@ builder.Services.AddAuthentication(options => {
     options.DefaultSignOutScheme =
     JwtBearerDefaults.AuthenticationScheme;
 })
-    .AddJwtBearer(options => {   
-        options.TokenValidationParameters = new TokenValidationParameters   
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
             ValidIssuer = builder.Configuration["JWT:Issuer"],
@@ -80,7 +84,7 @@ builder.Services.AddAuthentication(options => {
             ValidateIssuerSigningKey = true,
             IssuerSigningKey = new SymmetricSecurityKey(
                 System.Text.Encoding.UTF8.GetBytes(
-                builder.Configuration["JWT:SigningKey"]))   
+                builder.Configuration["JWT:SigningKey"]))
         };
     }
 );
@@ -106,7 +110,7 @@ builder.Services.AddCors(options =>
             policy.WithOrigins("http://localhost:3000", "https://itransitionfrontend.netlify.app")
                   .AllowAnyMethod()
                   .AllowAnyHeader()
-                  .AllowCredentials();  
+                  .AllowCredentials();
         });
 });
 
@@ -143,21 +147,21 @@ app.UseCors("FrontendPolicy");
 
 app.Use(async (context, next) =>
 {
-        var token = context.Request.Cookies[".AspNetCore.Application.Id"];
-        if (!string.IsNullOrEmpty(token)) 
-            context.Request.Headers["Authorization"] = "Bearer " + token;
- 
-        context.Response.Headers["X-Content-Type-Options"] = "nosniff";
-        context.Response.Headers["X-Xss-Protection"] = "1";
-        context.Response.Headers["X-Frame-Options"] = "DENY";
-        
-        await next();
+    var token = context.Request.Cookies[".AspNetCore.Application.Id"];
+    if (!string.IsNullOrEmpty(token))
+        context.Request.Headers["Authorization"] = "Bearer " + token;
+
+    context.Response.Headers["X-Content-Type-Options"] = "nosniff";
+    context.Response.Headers["X-Xss-Protection"] = "1";
+    context.Response.Headers["X-Frame-Options"] = "DENY";
+
+    await next();
 
 });
 
-app.UseAuthentication();    
+app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllers();  
+app.MapControllers();
 
 app.Run();

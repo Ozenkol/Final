@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers
 {
     [ApiController]
-    [Route("[controller]/[action]")] 
+    [Route("api/account")]
     public class AccountController : ControllerBase
     {
         private readonly IAccountService _accountService;
@@ -22,18 +22,19 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        // [ResponseCache(CacheProfileName = "NoCache")]
-        public async Task<ActionResult<Guid>> Register([FromBody] RegisterRequest registerRequest)   
+        [Route("registration")]
+        public async Task<ActionResult<Guid>> Register([FromBody] RegisterRequest registerRequest)
         {
-            var user = new User{
+            var user = new User
+            {
                 UserName = registerRequest.UserName,
                 Email = registerRequest.Email
             };
             return await _accountService.Register(user, registerRequest.Password);
         }
         [HttpPost]
-        // [ResponseCache(CacheProfileName = "NoCache")]
-        public async Task<ActionResult<UserResponse>> Login([FromBody] LoginRequest loginRequest)    
+        [Route("login")]
+        public async Task<ActionResult<UserResponse>> Login([FromBody] LoginRequest loginRequest)
         {
             var user = new User
             {

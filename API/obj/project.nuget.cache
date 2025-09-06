@@ -153,15 +153,6 @@
   ],
   "logs": [
     {
-      "code": "NU1900",
-      "level": "Warning",
-      "message": "Произошла ошибка при получении данных уязвимости пакета: Не удалось загрузить индекс службы для источника https://api.nuget.org/v3/index.json.",
-      "projectPath": "C:\\Users\\Ferrum\\intern\\Itransition\\Final\\backend\\api\\API.csproj",
-      "warningLevel": 1,
-      "filePath": "C:\\Users\\Ferrum\\intern\\Itransition\\Final\\backend\\api\\API.csproj",
-      "targetGraphs": []
-    },
-    {
       "code": "NU1701",
       "level": "Warning",
       "message": "Пакет \"EntityFramework 6.1.0\" был восстановлен с помощью \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1\", а не целевой платформы проекта \"net9.0\". Этот пакет может быть не полностью совместим с вашим проектом.",

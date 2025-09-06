@@ -1,5 +1,7 @@
 namespace API.Contracts.Field;
 
 public record FieldResponse(
-    string Name
+    Guid id,
+    string name,
+    string? value
 );
