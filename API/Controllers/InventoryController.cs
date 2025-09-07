@@ -69,13 +69,17 @@ public class InventoryController : ControllerBase
 
     [Authorize]
     [HttpPost]
-    public async Task<ActionResult<Guid>> CreateInventory([FromBody] InventoryRequest inventoryRequest)
+    public async Task<ActionResult<InventoryResponse>> CreateInventory([FromBody] InventoryRequest inventoryRequest)
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
         if (userId != null)
         {
-            var ok = await _inventoriesService.CreateInventory(Inventory.Create(Guid.Empty, inventoryRequest.title, new Guid(userId)).inventory);
-            return Ok(ok);
+            var createdInventory = await _inventoriesService.CreateInventory(Inventory.Create(Guid.Empty, inventoryRequest.title, new Guid(userId)).inventory);
+            var createdInventoryResponse = new InventoryResponse(
+                createdInventory.InventoryId,
+                createdInventory.InventoryName
+            );
+            return Ok(createdInventoryResponse);
         }
         return Forbid();
     }

@@ -14,7 +14,7 @@ public class InventoriesService : IInventoriesService
         _inventoriesRepository = inventoriesRepository;
     }
 
-    public async Task<Guid> CreateInventory(Inventory inventory)
+    public async Task<Inventory> CreateInventory(Inventory inventory)
     {
         return await _inventoriesRepository.CreateInventory(inventory);
     }

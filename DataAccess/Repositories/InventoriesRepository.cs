@@ -40,7 +40,7 @@ public class InventoriesRepository : IInventoriesRepository
             ).inventory;
         return inventory;
     }
-    public async Task<Guid> CreateInventory(Inventory inventory)
+    public async Task<Inventory> CreateInventory(Inventory inventory)
     {
         var inventoryEntity = new InventoryEntity
         {
@@ -49,7 +49,13 @@ public class InventoriesRepository : IInventoriesRepository
         };
         await _context.Inventories.AddAsync(inventoryEntity);
         await _context.SaveChangesAsync();
-        return inventoryEntity.InventoryId;
+        var createdInventory = Inventory.Create(
+            inventoryEntity.InventoryId,
+            inventoryEntity.InventoryName,
+            inventoryEntity.UserId
+        ).inventory;
+
+        return createdInventory;
     }
     public async Task<Guid> DeleteInventory(Guid id)
     {
