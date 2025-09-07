@@ -7,7 +7,8 @@ namespace Application.Services;
 public class FieldsService : IFieldsService
 {
     private readonly IFieldsRepository _fieldsRepository;
-    public FieldsService(IFieldsRepository fieldsRepository) {
+    public FieldsService(IFieldsRepository fieldsRepository)
+    {
         _fieldsRepository = fieldsRepository;
     }
     public async Task<Guid> CreateField(Guid inventoryId, Field field)

@@ -24,6 +24,11 @@ namespace Application.Services
             return await _valuesRepository.CreateFieldValueOfProduct(value, fieldId, productId);
         }
 
+        public async Task<Guid> DeleteValue(Guid id)
+        {
+            return await _valuesRepository.DeleteFieldValueOfProduct(id);
+        }
+
         public async Task<Value> GetFieldValueOfProduct(Guid fieldId, Guid productId)
         {
             return await _valuesRepository.GetFieldValueOfProduct(fieldId, productId);

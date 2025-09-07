@@ -3,13 +3,13 @@ using Core.Models;
 using DataAccess.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;   
-using System.IdentityModel.Tokens.Jwt;  
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
 namespace DataAccess.Repositories;
 
-public class AccountRepository: IAccountRepository
+public class AccountRepository : IAccountRepository
 {
     private readonly UserManager<UserEntity> _userManager;
     private readonly IConfiguration _configuration;
@@ -50,7 +50,8 @@ public class AccountRepository: IAccountRepository
 
         var jwtString = new JwtSecurityTokenHandler().WriteToken(jwtObject);
 
-        var loginUser = new User{
+        var loginUser = new User
+        {
             UserName = userEntity.UserName,
             Token = jwtString.ToString()
         };
@@ -66,14 +67,15 @@ public class AccountRepository: IAccountRepository
             Email = user.Email
         };
         var result = await _userManager.CreateAsync(
-            userEntity, password);   
-        if (result.Succeeded)            
+            userEntity, password);
+        if (result.Succeeded)
         {
             return new Guid(userEntity.Id);
         }
-        else {
+        else
+        {
             throw new Exception(
-            string.Format("Error: {0}", string.Join(" ", 
+            string.Format("Error: {0}", string.Join(" ",
                 result.Errors.Select(e => e.Description))));
         }
     }

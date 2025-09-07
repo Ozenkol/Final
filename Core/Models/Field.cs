@@ -5,9 +5,11 @@ public class Field
     public Guid FieldId { get; set; }
     public string Name { get; set; } = string.Empty;
     public Guid InventoryId { get; set; }
+    public ICollection<Value> Values { get; set; }  = new List<Value>();
+
     public Field(Guid fieldId, string fieldName, Guid inventoryId)
     {
-        InventoryId = fieldId;
+        FieldId = fieldId;
         Name = fieldName;
         InventoryId = inventoryId;
     }

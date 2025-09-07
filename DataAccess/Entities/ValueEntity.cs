@@ -10,12 +10,12 @@ namespace DataAccess.Entities
 {
     public class ValueEntity
     {
-        public Guid ValueId {get;set;}
+        public Guid ValueId { get; set; }
         public string Value { get; set; } = string.Empty;
         public Guid ProductId { get; set; }
-        public ProductEntity ?Product { get; set; }
+        public ProductEntity? Product { get; set; }
         public Guid FieldId { get; set; }
-        public FieldEntity ?Field { get; set; }
+        public FieldEntity? Field { get; set; }
 
     }
 }

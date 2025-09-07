@@ -101,6 +101,11 @@ builder.Services.AddScoped<IProductsService, ProductsService>();
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();     
+builder.Logging.AddDebug();
+builder.Logging.AddEventLog();
+
 
 builder.Services.AddCors(options =>
 {

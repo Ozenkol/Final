@@ -10,5 +10,7 @@ namespace Core.Abstractions.Services
     {
         Task<Value> GetFieldValueOfProduct(Guid fieldId, Guid productId);
         Task<Guid> CreateValue(Guid fieldId, Guid productId, Value value);
+
+        Task<Guid> DeleteValue(Guid id);
     }
 }

@@ -4,9 +4,10 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DataAccess.Configurations;
 
-public class FieldEntityConfiguration: IEntityTypeConfiguration<FieldEntity>
+public class FieldEntityConfiguration : IEntityTypeConfiguration<FieldEntity>
 {
-    public void Configure(EntityTypeBuilder<FieldEntity> builder) {
+    public void Configure(EntityTypeBuilder<FieldEntity> builder)
+    {
         builder.HasKey(f => f.FieldId);
         builder.Property(f => f.Name);
         builder.HasOne(i => i.Inventory).WithMany(i => i.Fields).HasForeignKey(i => i.InventoryId).IsRequired(false);

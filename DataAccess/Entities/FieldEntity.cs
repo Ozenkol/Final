@@ -13,8 +13,8 @@ namespace DataAccess.Entities
         public Guid FieldId { get; set; }
         public string Name { get; set; } = string.Empty;
         public Guid InventoryId { get; set; }
-        public InventoryEntity ?Inventory { get; set; }
-        public ICollection<ValueEntity> Values = new List<ValueEntity>();
+        public InventoryEntity? Inventory { get; set; }
+        public ICollection<ValueEntity> Values { get; set; }  = new List<ValueEntity>();
 
 
     }

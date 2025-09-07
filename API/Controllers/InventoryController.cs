@@ -31,7 +31,6 @@ public class InventoryController : ControllerBase
         return Ok(inventoriesResponse);
     }
 
-
     [Authorize]
     [HttpGet("{id}")]
     public async Task<ActionResult<InventoryResponse>> GetInventory(Guid id)
@@ -51,7 +50,7 @@ public class InventoryController : ControllerBase
     [Authorize]
     public async Task<ActionResult> DeleteInventory(Guid id) {
         var deletedInventory = await _inventoriesService.DeleteInventory(id);
-        if (string.IsNullOrEmpty(deletedInventory.ToString())) {
+        if (deletedInventory != null) {
             return Ok();
         }
         return Forbid();
@@ -75,7 +74,7 @@ public class InventoryController : ControllerBase
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
         if (userId != null)
         {
-            var ok = await _inventoriesService.CreateInventory(Inventory.Create(Guid.Empty, inventoryRequest.Title, new Guid(userId)).inventory);
+            var ok = await _inventoriesService.CreateInventory(Inventory.Create(Guid.Empty, inventoryRequest.title, new Guid(userId)).inventory);
             return Ok(ok);
         }
         return Forbid();

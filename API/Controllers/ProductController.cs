@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using API.Contracts.Field;
+using System.Text.Json;
 
 namespace API.Controllers
 {
@@ -18,11 +19,13 @@ namespace API.Controllers
     {
         private readonly IProductsService _productsService;
         private readonly IInventoriesService _inventoryService;
+        private readonly ILogger<ValueController> _logger;
 
-        public ProductController(IProductsService productsService, IInventoriesService inventoriesService)
+        public ProductController(IProductsService productsService, IInventoriesService inventoriesService, ILogger<ValueController> logger)
         {
             _productsService = productsService;
             _inventoryService = inventoriesService;
+            _logger = logger;
         }
 
         [Authorize]
@@ -50,21 +53,39 @@ namespace API.Controllers
         {
             var productList = await _productsService.GetInventoryProductList(id);
             var inventory = await _inventoryService.GetInventory(id);
-            var productListResponse = productList.Select(
-                p => new ProductResponse(
-                    p.InventoryId,
-                    p.Title,
-                    p.Description,
-                    inventory.Fields.Select(f => new FieldResponse(
-                        f.FieldId,
-                        f.Name,
-                        p.Values.Where(v => v.FieldId == f.FieldId)
-                        .Select(v => v.FieldValue)
-                        .FirstOrDefault()
-                    )).ToList()
-                )
-            ).ToList();
-            return productListResponse;
+
+            _logger.LogInformation("Fields: {fields}", 
+                JsonSerializer.Serialize(inventory.Fields, new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                }));
+
+
+            var productListResponse = productList
+                .Select(p =>
+                {
+                    var productValues = p.Values;
+
+                    return new ProductResponse(
+                        p.ProductId,   
+                        p.Title,
+                        p.Description,
+                        (inventory?.Fields ?? Array.Empty<Field>())
+                            .Select(f => new FieldResponse(
+                                f.FieldId,
+                                f.Name,
+                                (p.Values ?? Enumerable.Empty<Value>())
+                                    .Where(v => v.FieldId == f.FieldId)
+                                    .Select(v => v.FieldValue)
+                                    .FirstOrDefault() ?? ""
+                            )).ToList()
+
+                    );
+                })
+        .ToList();
+
+    return Ok(productListResponse);
+
         }
 
         [Authorize]

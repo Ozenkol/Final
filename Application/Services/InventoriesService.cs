@@ -6,10 +6,11 @@ using DataAccess.Repositories;
 
 namespace Application.Services;
 
-public class InventoriesService: IInventoriesService
+public class InventoriesService : IInventoriesService
 {
     private readonly IInventoriesRepository _inventoriesRepository;
-    public InventoriesService(IInventoriesRepository inventoriesRepository) {
+    public InventoriesService(IInventoriesRepository inventoriesRepository)
+    {
         _inventoriesRepository = inventoriesRepository;
     }
 

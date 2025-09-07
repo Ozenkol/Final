@@ -5,9 +5,10 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DataAccess.Configurations;
 
-public class ValueEntityConfiguration: IEntityTypeConfiguration<ValueEntity>
+public class ValueEntityConfiguration : IEntityTypeConfiguration<ValueEntity>
 {
-    public void Configure(EntityTypeBuilder<ValueEntity> builder) {
+    public void Configure(EntityTypeBuilder<ValueEntity> builder)
+    {
         builder.HasKey(i => i.ValueId);
         builder.Property(i => i.Value);
         builder.HasOne(i => i.Product).WithMany(i => i.Values).HasForeignKey(i => i.ProductId).IsRequired(false);
